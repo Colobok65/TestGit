@@ -13,8 +13,8 @@
     <thead>
     <tr>
         <th>User Id</th>
-        <th>First Name</th>
-        <th>Last Name</th>
+        <th>First name</th>
+        <th>Last name</th>
         <th>Age</th>
         <th colspan=2>Actions</th>
     </tr>
@@ -23,8 +23,8 @@
     <c:forEach items="${users}" var="user">
         <tr>
             <td><c:out value="${user.id}" /></td>
-            <td><c:out value="${user.firstname}" /></td>
-            <td><c:out value="${user.lastname}" /></td>
+            <td><c:out value="${user.firstName}" /></td>
+            <td><c:out value="${user.lastName}" /></td>
             <td><c:out value="${user.age}" /></td>
             <td><a href="UserController?action=edit&Id=<c:out value="${user.id}"/>">Update</a></td>
             <td><a href="UserController?action=delete&Id=<c:out value="${user.id}"/>">Delete</a></td>

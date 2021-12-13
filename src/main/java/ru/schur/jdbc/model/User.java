@@ -12,4 +12,13 @@ public class User {
 
     private int age;
 
+    public User() {
+    }
+
+    public User(Integer id, String firstName, String lastName, int age) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
 }

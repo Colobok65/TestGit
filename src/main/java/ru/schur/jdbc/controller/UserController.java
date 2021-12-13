@@ -1,6 +1,6 @@
 package ru.schur.jdbc.controller;
 
-import ru.schur.jdbc.dao.UserDao;
+import ru.schur.jdbc.service.UserService;
 import ru.schur.jdbc.model.User;
 
 import javax.servlet.RequestDispatcher;
@@ -12,17 +12,17 @@ import java.io.IOException;
 
 public class UserController extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static String INSERT_OR_EDIT = "/user.jsp";
-    private static String LIST_USER = "/listUser.jsp";
-    private UserDao dao;
+    private static final String INSERT_OR_EDIT = "/user.jsp";
+    private static final String LIST_USER = "/listUser.jsp";
+    private final UserService dao;
 
     public UserController() {
         super();
-        dao = new UserDao();
+        dao = new UserService();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String forward="";
+        String forward = "";
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("delete")){
@@ -48,8 +48,8 @@ public class UserController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = new User();
-        user.setFirstName(request.getParameter("first_name"));
-        user.setLastName(request.getParameter("last_name"));
+        user.setFirstName(request.getParameter("firstname"));
+        user.setLastName(request.getParameter("lastname"));
         user.setAge(Integer.parseInt(request.getParameter("age")));
 
         String userId = request.getParameter("id");

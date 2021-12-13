@@ -1,17 +1,17 @@
-package ru.schur.jdbc.dao;
+package ru.schur.jdbc.service;
 
 import ru.schur.jdbc.model.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDao {
+public class UserService {
     private Connection connection;
 
-    public UserDao() {
+    {
         try {
             Class.forName("org.postgresql.Driver");
-            connection = DriverManager.getConnection("jdbc:postgresql://192.168.1.210:5432/testdb" ,"mgr_admin", "31101993");
+            connection = DriverManager.getConnection("jdbc:postgresql://192.168.1.210:5432/testdb", "postgres", "01470147");
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -21,8 +21,7 @@ public class UserDao {
     public void addUser(User user) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO users" + "  (firstname, lastname, age) VALUES  " +
-                            " (?, ?, ?);");
+                    .prepareStatement("INSERT INTO users (firstname, lastname, age) VALUES (?, ?, ?);");
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setInt(3, user.getAge());
@@ -35,7 +34,7 @@ public class UserDao {
     public void deleteUser(int userId) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("delete from users where userid=?");
+                    .prepareStatement("delete from users where id=?");
             preparedStatement.setInt(1, userId);
             preparedStatement.executeUpdate();
 
@@ -66,8 +65,8 @@ public class UserDao {
             while (rs.next()) {
                 User user = new User();
                 user.setId(rs.getInt("id"));
-                user.setFirstName(rs.getString("firs_tname"));
-                user.setLastName(rs.getString("last_name"));
+                user.setFirstName(rs.getString("firstname"));
+                user.setLastName(rs.getString("lastname"));
                 user.setAge(rs.getInt("age"));
                 users.add(user);
             }
@@ -81,14 +80,14 @@ public class UserDao {
         User user = new User();
         try {
             PreparedStatement preparedStatement = connection.
-                    prepareStatement("SELECT id,firstname,lastname,age FROM users WHERE id =?;");
+                    prepareStatement("SELECT id, firstname, lastname, age FROM users WHERE id =?;");
             preparedStatement.setInt(1, userId);
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
                 user.setId(rs.getInt("id"));
-                user.setFirstName(rs.getString("firs_tname"));
-                user.setLastName(rs.getString("last_name"));
+                user.setFirstName(rs.getString("firstname"));
+                user.setLastName(rs.getString("lastname"));
                 user.setAge(rs.getInt("age"));
             }
         } catch (SQLException e) {

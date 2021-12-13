@@ -13,18 +13,18 @@
 </head>
 <body>
 
-<form method="POST" action='UsersServlet' name="frmAddUser">
+<form method="POST" action='UserController' name="formAddUser">
     User ID : <input type="text" readonly="readonly" name="id"
                      value="<c:out value="${user.id}" />" /> <br />
     First Name : <input
         type="text" name="firstname"
-        value="<c:out value="${user.firstname}" />" /> <br />
+        value="<c:out value="${user.firstName}" />" /> <br />
     Last Name : <input
         type="text" name="lastname"
-        value="<c:out value="${user.lastname}" />" /> <br />
+        value="<c:out value="${user.lastName}" />" /> <br />
     Age : <input type="text" name="age"
                  value="<c:out value="${user.age}" />" /> <br /> <input
-        type="submit" value="Submit" />
+        type="submit" value="Добавить" />
 </form>
 </body>
 </html>
